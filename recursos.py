@@ -4,11 +4,20 @@ import os
 # Diretório onde os PDFs estão localizados
 pdf_directory = r'C:\Users\henrique.neves\PycharmProjects\RECURSOS'
 
-
-# Função para criar um índice dos PDFs
 def create_index(directory):
+    # Use caminho relativo para o diretório atual
+    directory = os.path.join(os.path.dirname(__file__), directory)
+    
+    # Verifique se o diretório existe
+    if not os.path.exists(directory):
+        raise FileNotFoundError(f"Diretório não encontrado: {directory}")
+
     pdf_files = [f for f in os.listdir(directory) if f.endswith('.pdf')]
     return pdf_files
+
+# Caminho relativo para o diretório onde os PDFs estão localizados (diretório atual)
+pdf_directory = '.'
+pdf_files = create_index(pdf_directory)
 
 
 # Função para remover a extensão do PDF do nome do arquivo
